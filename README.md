@@ -44,12 +44,8 @@ awaitable<void> query_test_task(int i, std::string cmd){
     // aiopg_conn.close_conn();
 }// query_test()
 ```   
-  
-  
-Test unit:
-----------------
-Aiolibpq_simple_test_unit.cpp  
-    
+      
+
     
 How to use:
 ----------------
@@ -58,7 +54,9 @@ How to use:
 2. then rebuild libpq c lib;  
 3. include and link libpq;  
 3. include and link boost asio;  
+4. include Aiolibpq_simple.hpp;
 4. set(CMAKE_CXX_STANDARD_REQUIRED 20);  
+5. make with Aiolibpq_simple.cpp;
 
 
 Note:
@@ -85,6 +83,11 @@ Note:
 &#8195;&#8195;https://en.cppreference.com/w/cpp/23  
 &#8195;&#8195;if not, use fmt::format() or delete that;
 
+
+Test unit:
+----------------
+Aiolibpq_simple_test_unit.cpp  
+![image](https://github.com/gamefunc/Aiolibpq_simple/blob/main/ws_robo_compressed.jpg)
 
 License:
 ----------------
