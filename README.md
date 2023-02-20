@@ -21,7 +21,7 @@ awaitable<void> query_test_task(int i, std::string cmd){
         "db_name", "gamefunc", "password", 
         "127.0.0.1", 5432);
 
-    err = co_await aiopg_conn.connect();
+    int err = co_await aiopg_conn.connect();
     if(err){ throw 0; }
 
     err = co_await aiopg_conn.execute(cmd);
