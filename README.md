@@ -71,12 +71,14 @@ Note:
   // want like: for(auto p: co_await fetchone()){ if(!p){break;} dodo(p); }
   // but co_yield coro task is not yet supported: so impl yourself;
   // see "Aiolibpq_simple.hpp"  coro::gen<PGresult*> fetchone();
-  ...some code...
-  co_await asyncio_wait_fd_rw(fd, tcp::socket::wait_read);
-  ...some code...
-  while(!PQisBusy(conn)){
-    co_yield PQgetResult(conn);
-  }// while(!PQisBusy(conn))
+  while(...){
+    ...some code...
+    co_await asyncio_wait_fd_rw(fd, tcp::socket::wait_read);
+    ...some code...
+    while(!PQisBusy(conn)){
+      co_yield PQgetResult(conn);
+    }// while(!PQisBusy(conn))
+  }// while(...)
 ```  
 
 3: default use std::format, need gcc13, clang14, msvc19.32,  
