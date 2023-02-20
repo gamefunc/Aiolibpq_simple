@@ -86,8 +86,9 @@ Note:
 
 Test unit:
 ----------------
-Aiolibpq_simple_test_unit.cpp  
-![image](https://github.com/gamefunc/Aiolibpq_simple/blob/main/ws_robo_compressed.jpg)
+"Aiolibpq_simple_test_unit.cpp"  
+![image](https://raw.githubusercontent.com/gamefunc/Aiolibpq_simple/main/img/test_result.png)  
+
 
 License:
 ----------------
