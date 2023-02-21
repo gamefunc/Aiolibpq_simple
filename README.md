@@ -89,7 +89,10 @@ Note:
 Test unit:
 ----------------
 "Aiolibpq_simple_test_unit.cpp"  
+1. normal test:  
 ![image](https://raw.githubusercontent.com/gamefunc/Aiolibpq_simple/main/img/test_result.png)  
+2. task keep alive test:  
+![image](https://raw.githubusercontent.com/gamefunc/Aiolibpq_simple/main/img/test_keep_alive_result.png)  
 
 
 License:
