@@ -19,8 +19,15 @@ test env:
 
 #include "Aiolibpq_simple.hpp"
 #include <chrono>
+#include <random>
 using boost::asio::steady_timer;
 
+// if true: need set postgresql.conf: max_connections=65530,
+// because default max_connections = 100:
+bool KEEP_TASK_ALIVE = false;
+
+
+// some query msg:
 std::vector<std::string> QUERY_CMDS{
     "select * from hanime_collection;",
     "select cover_name from hanime_collection;"
@@ -83,6 +90,19 @@ awaitable<void> query_test_task(int i, std::string cmd){
         rows_dict["cover_name"][i]
     );
 
+    // keep task alive, 
+    // asyncio_sleep_ms() can be other await io event;
+    if(KEEP_TASK_ALIVE){
+        std::random_device rd;
+        std::mt19937_64 gen64(rd());
+        for(;;){
+            // sleep random(< 20 second) time:
+            co_await asyncio_sleep_ms(gen64() % (20 * 1000));
+            std::cout << std::format(
+                "task_{}: still alive;\n", i);
+        }// for(;;)
+    }// if(KEEP_TASK_ALIVE)
+
     // aiopg_conn.close_conn();
 }// query_test()
 
@@ -94,7 +114,9 @@ awaitable<void> main_start(){
             loop, 
             query_test_task(i, QUERY_CMDS[i % QUERY_CMDS.size()]), 
             detached);
-        if(i % 120 == 0){ co_await asyncio_sleep_ms(5 * 1000); }
+        if((i % 120 == 0) && !KEEP_TASK_ALIVE){ 
+            co_await asyncio_sleep_ms(5 * 1000); 
+        }// if (i % 120 == 0)
     }// for i in range(n)
 }// main_start()
 
